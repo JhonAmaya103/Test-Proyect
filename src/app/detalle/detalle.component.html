@@ -1,0 +1,8 @@
+<p *ngIf="idCategoria !== 0">{{ idCategoria }}</p>
+
+
+<p *ngFor="let juego of juegosCategoria">
+  {{ juego.nombre }}
+  {{juego.precio}}
+</p>
+

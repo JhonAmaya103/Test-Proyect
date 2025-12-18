@@ -1,0 +1,50 @@
+<div class="max-w-md mx-auto p-4 font-sans">
+
+  <h2 class="text-xl font-bold mb-4">Seleccionar Categoría</h2>
+
+  <!-- SELECT DE CATEGORÍAS -->
+  <select
+    [(ngModel)]="categoriaSeleccionada"
+    class="w-full p-2 border border-gray-400 rounded-md mb-4 text-lg cursor-pointer"
+  >
+    <option [ngValue]="null">Seleccione una categoría</option>
+    <option *ngFor="let cat of categorias" [ngValue]="cat.id">
+      {{ cat.nombre }}
+    </option>
+  </select>
+
+  <!-- BOTÓN -->
+  <button
+    (click)="filtrar()"
+    class="w-full p-3 bg-orange-500 text-white rounded-md text-lg mb-6 hover:bg-orange-600 transition"
+  >
+    {{ mostrarJuegos ? 'Ocultar juegos' : 'Mostrar juegos' }}
+  </button>
+
+  <!-- LISTA DE JUEGOS FILTRADOS -->
+  <div *ngIf="mostrarJuegos">
+
+    <h3 class="text-lg font-semibold mb-2">Videojuegos:</h3>
+
+    <select
+      [(ngModel)]="juegoSeleccionado"
+      (change)="seleccionarJuego()"
+      class="w-full p-2 border border-gray-400 rounded-md text-lg cursor-pointer"
+    >
+      <option [ngValue]="null">Seleccione un juego</option>
+      <option *ngFor="let juego of juegosFiltrados" [ngValue]="juego.id">
+        {{ juego.nombre }}
+      </option>
+    </select>
+
+  </div>
+
+  <!-- IMAGEN DEL JUEGO -->
+  <div *ngIf="imagenSeleccionada" class="mt-6">
+    <img
+      [src]="imagenSeleccionada"
+      class="w-72 h-48 object-cover rounded-lg mx-auto shadow"
+    >
+  </div>
+
+</div>
