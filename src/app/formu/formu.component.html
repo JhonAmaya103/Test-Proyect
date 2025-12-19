@@ -5,7 +5,7 @@
 >
 
   <h2 class="bg-black text-white p-5 rounded-lg text-lg text-center">
-    Busca tu juego
+   🔍 Busca tu juego 🔎
   </h2>
 
   <!-- Categoría -->
@@ -43,26 +43,9 @@
   >
     Enviar
   </button>
-
-  <!-- Resultado único -->
-  <div *ngIf="juegoEncontrado" class="mt-4 p-4 border rounded shadow">
-    <h3 class="font-bold text-lg">{{ juegoEncontrado.nombre }}</h3>
-    <img [src]="juegoEncontrado.imagen" class="w-40 my-2">
-    <p>{{ juegoEncontrado.descripcion }}</p>
-  </div>
-
-  <!-- Resultado por categoría -->
-  <div *ngIf="!juegoEncontrado && juegosResultado.length > 0" class="mt-4">
-    <h3 class="font-bold text-lg">Juegos de la categoría</h3>
-
-    <div *ngFor="let juego of juegosResultado"
-         class="p-4 border rounded shadow mt-2">
-      <p class="font-semibold">{{ juego.nombre }}</p>
-      <img [src]="juego.imagen" class="w-32 my-2">
-      <p>{{ juego.descripcion }}</p>
-    </div>
-  </div>
-
 </form>
 
-<app-detalle [idCategoria]="idCategoria"></app-detalle>
+<app-detalle [juegosCategoria]="juegosResultado"></app-detalle>
+
+
+

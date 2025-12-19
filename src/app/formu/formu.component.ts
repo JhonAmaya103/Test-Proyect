@@ -12,6 +12,7 @@ export class FormuComponent implements OnInit {
 
   nombreUsuario = 'Angular 14';
   idCategoria: number = 0;
+  juegosResultado: Juegos[] = [];
 
   miFormulario!: FormGroup;
   categorias: Categoria[] = [];
@@ -19,7 +20,6 @@ export class FormuComponent implements OnInit {
 
   // Resultados
   juegoEncontrado?: Juegos;
-  juegosResultado: Juegos[] = [];
 
   constructor(
     private fb: FormBuilder,
@@ -33,34 +33,29 @@ export class FormuComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.categorias = this.listaService.getCategorias();
+  this.categorias = this.listaService.getCategorias();
 
-    // Detecta cambio de categoría
-    this.miFormulario.get('categoria_juego')?.valueChanges.subscribe(id => {
-      this.idCategoria = Number(id);
+  // 🔹 Autocompletado por nombre + categoría
+  this.miFormulario.get('nombre')?.valueChanges.subscribe(valor => {
+
+    const categoriaId = Number(this.miFormulario.get('categoria_juego')?.value);
+
+    if (!valor || !categoriaId) {
       this.sugerencias = [];
-      this.miFormulario.get('nombre')?.setValue('');
-      console.log(Number(id))
-    });
+      return;
+    }
 
-    // Autocompletado
-    this.miFormulario.get('nombre')?.valueChanges.subscribe(valor => {
+    const texto = valor.toLowerCase();
 
-      if (!valor || !this.idCategoria) {
-        this.sugerencias = [];
-        return;
-      }
+    this.sugerencias = this.listaService
+      .getJuegos()
+      .filter(j =>
+        j.categoriaId === categoriaId &&
+        j.nombre.toLowerCase().includes(texto)
+      );
+  });
+}
 
-      const texto = valor.toLowerCase();
-
-      this.sugerencias = this.listaService
-        .getJuegos()
-        .filter(j =>
-          j.categoriaId === this.idCategoria &&
-          j.nombre.toLowerCase().includes(texto)
-        );
-    });
-  }
 
   seleccionarJuego(juego: Juegos) {
     this.miFormulario.get('nombre')?.setValue(juego.nombre);
@@ -69,30 +64,43 @@ export class FormuComponent implements OnInit {
 
   submitForm() {
 
-    if (this.miFormulario.invalid) {
-      this.miFormulario.markAllAsTouched();
-      return;
-    }
+  console.log('Submit ejecutado');
 
-    const { nombre } = this.miFormulario.value;
-
-    this.juegoEncontrado = undefined;
-    this.juegosResultado = [];
-
-    // 1️⃣ Nombre + categoría
-    if (nombre && nombre.trim() !== '') {
-      const juego = this.listaService.getJuego(nombre, this.idCategoria);
-
-      if (juego) {
-        this.juegoEncontrado = juego;
-        this.juegosResultado = [juego];
-      }
-      return;
-    }
-
-    // 2️⃣ Solo categoría
-    this.juegosResultado = this.listaService
-      .getJuegos()
-      .filter(j => j.categoriaId === this.idCategoria);
+  if (this.miFormulario.invalid) {
+    return;
   }
+
+  const { nombre, categoria_juego } = this.miFormulario.value;
+
+  const categoriaId = Number(categoria_juego);
+
+  console.log('Categoría:', categoriaId);
+  console.log('Nombre:', nombre);
+
+  this.juegosResultado = [];
+
+  // 🔹 CON NOMBRE → SOLO ESE JUEGO
+  if (nombre && nombre.trim() !== '') {
+
+    const juego = this.listaService.getJuego(nombre, categoriaId);
+
+    console.log('Juego encontrado:', juego);
+
+    if (juego) {
+      this.juegosResultado = [juego];
+    }
+
+    return;
+  }
+
+  // 🔹 SIN NOMBRE → TODOS LOS DE LA CATEGORÍA
+  this.juegosResultado = this.listaService
+    .getJuegos()
+    .filter(j => j.categoriaId === categoriaId);
+
+  console.log('Juegos por categoría:', this.juegosResultado);
+}
+
+
+
 }

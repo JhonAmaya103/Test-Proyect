@@ -1,8 +1,17 @@
-<p *ngIf="idCategoria !== 0">{{ idCategoria }}</p>
 
+<div *ngIf="juegosCategoria.length > 0"
+     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
 
-<p *ngFor="let juego of juegosCategoria">
-  {{ juego.nombre }}
-  {{juego.precio}}
-</p>
+  <div *ngFor="let juego of juegosCategoria"
+       class="bg-white rounded-xl shadow-lg overflow-hidden">
 
+    <img [src]="juego.imagen" class="w-full h-64 object-cover">
+
+    <div class="p-4">
+      <h2 class="font-bold">{{ juego.nombre }}</h2>
+      <p>{{ juego.descripcion }}</p>
+    </div>
+
+  </div>
+
+</div>
