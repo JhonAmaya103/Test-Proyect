@@ -5,7 +5,7 @@
 >
 
   <h2 class="bg-black text-white p-5 rounded-lg text-lg text-center">
-   🔍 Busca tu juego 🔎
+    🔍 Busca tu juego 🔎
   </h2>
 
   <!-- Categoría -->
@@ -13,7 +13,7 @@
     formControlName="categoria_juego"
     class="border w-full rounded px-3 py-2"
   >
-    <option value="" disabled>Selecciona una categoría</option>
+    <option value="">Todas las categorías</option>
     <option *ngFor="let categoria of categorias" [value]="categoria.id">
       {{ categoria.nombre }}
     </option>
@@ -45,7 +45,5 @@
   </button>
 </form>
 
+<!-- ENVÍO AL COMPONENTE HIJO -->
 <app-detalle [juegosCategoria]="juegosResultado"></app-detalle>
-
-
-

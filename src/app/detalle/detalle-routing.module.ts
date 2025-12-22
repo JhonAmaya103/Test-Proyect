@@ -1,14 +1,24 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-
-import { DetalleComponent } from './detalle.component';
+import { FormuComponent } from '../formu/formu.component';
 
 const routes: Routes = [
-  { path: '', component: DetalleComponent }
+  // {
+  //   path: '', redirectTo: '/inicio', pathMatch: 'full' 
+  // },
+  // {
+  //   path: '',
+  //   component: PruebaComponent
+  // },
+  {
+    path: 'detalle',
+    component: FormuComponent
+  }
 ];
+ 
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class DetalleRoutingModule { }
+export class DetalleRoutingModule {}

@@ -1,4 +1,3 @@
-
 <div *ngIf="juegosCategoria.length > 0"
      class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
 
@@ -9,9 +8,13 @@
 
     <div class="p-4">
       <h2 class="font-bold">{{ juego.nombre }}</h2>
+      <p>{{ juego.precio }}</p>
       <p>{{ juego.descripcion }}</p>
     </div>
-
   </div>
-
 </div>
+
+<p *ngIf="juegosCategoria.length === 0"
+   class="text-center text-gray-500 mt-6">
+  No se encontraron juegos.
+</p>
