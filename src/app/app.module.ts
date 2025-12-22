@@ -8,15 +8,14 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { FormuComponent } from './formu/formu.component';
 import { DetalleComponent } from './detalle/detalle.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { PruebaComponent } from './prueba/prueba.component';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     AppNavbarComponent,
      DetalleComponent,
-   FormuComponent,
-   PruebaComponent
+   FormuComponent
   ],
   imports: [
     BrowserModule,
