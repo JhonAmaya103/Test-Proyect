@@ -5,12 +5,12 @@ export interface Categoria {
 }
 
 export interface Juegos {
-  id:number;
-  nombre:string;
+  id: number;
+  nombre: string;
   categoriaId: number;
-  imagen:string;
-  precio:number;
-  descripcion:string;
+  imagen: string;
+  precio: number;
+  descripcion: string;
 }
 
 

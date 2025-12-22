@@ -7,7 +7,7 @@ import { Categoria, Juegos } from '../../Servicios/categoria.model';
   templateUrl: './lista-categorias.component.html',
   styleUrls: ['./lista-categorias.component.css']
 })
- export class ListaCategoriasComponent {
+export class ListaCategoriasComponent {
 
   categorias: Categoria[] = [];
   juegos: Juegos[] = [];
@@ -19,7 +19,7 @@ import { Categoria, Juegos } from '../../Servicios/categoria.model';
   juegoSeleccionado: number | null = null;
   imagenSeleccionada: string | null = null;
 
-  constructor(private listasService: ListasService) {}
+  constructor(private listasService: ListasService) { }
 
   ngOnInit() {
     this.categorias = this.listasService.getCategorias();
@@ -33,7 +33,7 @@ import { Categoria, Juegos } from '../../Servicios/categoria.model';
       this.juegosFiltrados = this.juegos.filter(
         j => j.categoriaId === this.categoriaSeleccionada
       );
-      
+
     } else {
       this.juegosFiltrados = [];
     }

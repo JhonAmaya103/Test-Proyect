@@ -14,4 +14,4 @@ import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.co
     DetalleRoutingModule
   ]
 })
-export class DetalleModule {}
+export class DetalleModule { }
