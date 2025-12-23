@@ -1,20 +1,18 @@
-<div *ngIf="juegosCategoria.length > 0"
-     class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
 
-  <div *ngFor="let juego of juegosCategoria"
-       class="bg-white rounded-xl shadow-lg overflow-hidden">
+<div class="mt-10 px-6">
+  <div *ngIf="juegosCategoria.length > 0"
+       class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
 
-    <img [src]="juego.imagen" class="w-full h-64 object-cover">
+    <div *ngFor="let juego of juegosCategoria"
+         class="bg-white rounded-xl shadow-lg overflow-hidden">
 
-    <div class="p-4">
-      <h2 class="font-bold">{{ juego.nombre }}</h2>
-      <p>{{ juego.precio }}</p>
-      <p>{{ juego.descripcion }}</p>
+      <img [src]="juego.imagen" class="w-full h-64 object-cover">
+
+      <div class="p-4">
+        <h2 class="font-bold">{{ juego.nombre }}</h2>
+        <p>{{ juego.precio }}</p>
+        <p>{{ juego.descripcion }}</p>
+      </div>
     </div>
   </div>
 </div>
-
-<p *ngIf="juegosCategoria.length === 0"
-   class="text-center text-gray-500 mt-6">
-  No se encontraron juegos.
-</p>

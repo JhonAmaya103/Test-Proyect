@@ -46,4 +46,9 @@
 </form>
 
 <!-- ENVÍO AL COMPONENTE HIJO -->
-<app-detalle [juegosCategoria]="juegosResultado"></app-detalle>
+
+<app-detalle
+  [idCategoria]="idCategoria"
+  [textoBusqueda]="miFormulario.value.nombre">
+</app-detalle>
+

@@ -14,6 +14,7 @@ export class FormuComponent implements OnInit {
 
   categorias: Categoria[] = [];
   sugerencias: Juegos[] = [];
+  idCategoria = 0;
   juegosResultado: Juegos[] = [];
 
   constructor(
@@ -21,7 +22,7 @@ export class FormuComponent implements OnInit {
     private listaService: ListasService
   ) {
     this.miFormulario = this.fb.group({
-      categoria_juego: [''], // ❗ ya NO es required
+      categoria_juego: [''],
       nombre: ['']
     });
   }
@@ -29,7 +30,7 @@ export class FormuComponent implements OnInit {
   ngOnInit(): void {
     this.categorias = this.listaService.getCategorias();
 
-    // Autocompletado (solo si hay categoría)
+    //Autocompletado
     this.miFormulario.get('nombre')?.valueChanges.subscribe(valor => {
 
       const texto = valor?.toLowerCase().trim();
@@ -54,31 +55,39 @@ export class FormuComponent implements OnInit {
     this.sugerencias = [];
   }
 
+  // Boton 
   submitForm() {
-
     const { nombre, categoria_juego } = this.miFormulario.value;
-
     const texto = nombre?.toLowerCase().trim();
     const categoriaId = Number(categoria_juego);
 
+    this.idCategoria = categoriaId;
+    this.sugerencias = [];  // limpia las sugerencias al hacer submit
     this.juegosResultado = [];
 
-    // 🔹 TEXTO (con o sin categoría)
     if (texto && texto.length >= 2) {
       this.juegosResultado = this.listaService
         .getJuegos()
-        .filter(j =>
-          j.nombre.toLowerCase().includes(texto) &&
-          (categoriaId ? j.categoriaId === categoriaId : true)
-        );
+        .filter(juego => {
+          if (categoriaId && juego.categoriaId !== categoriaId) return false;
+
+          const nombreJuego = juego.nombre.toLowerCase();
+          const palabras = nombreJuego.split(' ');
+          const abreviatura = palabras.map(p => p[0]).join('');
+
+          console.log(this.juegosResultado)
+
+          return abreviatura.startsWith(texto);
+        });
+
       return;
     }
 
-    // 🔹 SOLO categoría (sin texto)
     if (categoriaId) {
       this.juegosResultado = this.listaService
         .getJuegos()
         .filter(j => j.categoriaId === categoriaId);
     }
   }
+
 }
