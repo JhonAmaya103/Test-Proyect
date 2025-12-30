@@ -3,5 +3,5 @@
 @tailwind utilities;
 
 *{
-    background-color: rgb(206, 255, 255);
+    background-image: url(../assets/imagenes/fondo.jpg);
 }

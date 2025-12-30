@@ -20,23 +20,25 @@ export class DetalleComponent implements OnChanges {
 
     const texto = this.textoBusqueda?.toLowerCase().trim();
 
-    // Filtro 
-    if (!this.idCategoria && (!texto || texto.length < 3)) {
-      this.juegosCategoria = [];
-      return;
+    // Mostrar todos los juegos al inicio
+    let juegos = this.listaService.getJuegos();
+
+    // filtro por categoria (si no es 0)
+    if (this.idCategoria > 0) {
+      juegos = juegos.filter(
+        j => j.categoriaId === this.idCategoria
+      );
+      console.log('idCategoria', this.idCategoria)
     }
 
-    this.juegosCategoria = this.listaService.getJuegos().filter(j => {
+    // Filtro por texto (si hay texto válido)
+    if (texto && texto.length >= 2) {
+      juegos = juegos.filter(j =>
+        j.nombre.toLowerCase().includes(texto) ||
+        j.descripcion.toLowerCase().includes(texto)
+      );
+    }
 
-      const coincideCategoria =
-        this.idCategoria ? j.categoriaId === this.idCategoria : true;
-
-      const coincideTexto =
-        texto && texto.length >= 3
-          ? j.nombre.toLowerCase().includes(texto)
-          : true;
-
-      return coincideCategoria && coincideTexto;
-    });
+    this.juegosCategoria = juegos;
   }
 }

@@ -8,6 +8,7 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { FormuComponent } from './formu/formu.component';
 import { DetalleComponent } from './detalle/detalle.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ListaCompraComponent } from './lista-compra/lista-compra.component';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     AppComponent,
     AppNavbarComponent,
     DetalleComponent,
-    FormuComponent
+    FormuComponent,
+    ListaCompraComponent
   ],
   imports: [
     BrowserModule,
