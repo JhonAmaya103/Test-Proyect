@@ -10,7 +10,7 @@
 
       <div class="p-4">
         <h2 class="font-bold">{{ juego.nombre }}</h2>
-        <p>{{ juego.precio | currency: 'COP '}}</p>
+        <p>{{ juego.precio | currency: 'COP' : 'symbol':'1.0-0' }}</p>
         <p>{{ juego.descripcion }}</p>
       </div>
     </div>

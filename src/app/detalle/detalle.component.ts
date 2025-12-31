@@ -2,6 +2,7 @@ import { Component, Input, OnChanges } from '@angular/core';
 import { Juegos } from '../Servicios/categoria.model';
 import { ListasService } from '../Servicios/listas.service';
 
+
 @Component({
   selector: 'app-detalle',
   templateUrl: './detalle.component.html',

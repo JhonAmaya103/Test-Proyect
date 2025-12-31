@@ -4,4 +4,6 @@
 
 *{
     background-image: url(../assets/imagenes/fondo.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
 }
