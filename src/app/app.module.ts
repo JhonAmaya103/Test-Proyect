@@ -7,7 +7,7 @@ import { AppNavbarComponent } from './app-navbar/app-navbar.component';
 import { FormuComponent } from './formu/formu.component';
 import { DetalleComponent } from './detalle/detalle.component';
 import { ListaCompraComponent } from './lista-compra/lista-compra.component';
-
+// Importar datos de localizacion de Colombia
 import { registerLocaleData } from '@angular/common';
 import localeEsCO from '@angular/common/locales/es-CO';
 

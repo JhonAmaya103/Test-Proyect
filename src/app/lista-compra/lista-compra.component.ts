@@ -14,7 +14,7 @@ export class ListaCompraComponent implements OnInit {
   total = 0;
 
   constructor(private listaService: ListasService) { }
-  // Suscribirse al carrito de compras en el servicio
+  // Suscripción al observable del carrito de compras
   ngOnInit(): void {
     this.listaService.carrito$.subscribe(carrito => {
 

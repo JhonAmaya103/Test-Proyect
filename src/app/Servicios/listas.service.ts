@@ -66,7 +66,4 @@ export class ListasService {
     this.cantidadCarritoSubject.next(this.carrito.length);
   }
 
-  obtenerCarrito(): Juegos[] {
-    return this.carrito;
-  }
 }

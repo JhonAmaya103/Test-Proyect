@@ -2,13 +2,13 @@
   <a routerLink="/" class="text-white ">Inicio</a>
   <a routerLink="/" class="text-white p-5">Lista Categorias</a>
   <a routerLink="/detalle" class="text-white">Ir a Detalle</a>
-  <button class="  absolute top-1 right-10" [routerLink]="['/lista-compra']">
-    
+  <button class="absolute right-10" [routerLink]="['/lista-compra']">
+
     <img src="/assets/iconos/carrito-compra.svg" alt="Logo" class="h-10 w-10 inline-block ml-10 rounded-full">
     <!--contador de juegos-->
     <span *ngIf="cantidadCarrito > 0" class="absolute -top-6 -right-3 bg-red-600 text-white text-xs
-             rounded-s-full  flex items-center justify-center">
+             rounded-full  flex items-center justify-center">
       {{ cantidadCarrito }}
-    </span>  
+    </span>
   </button>
 </nav>

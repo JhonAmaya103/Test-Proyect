@@ -12,7 +12,7 @@ export class AppNavbarComponent implements OnInit {
 
   constructor(private listaService: ListasService) { }
 
-  //
+  // Suscripción al observable de cantidad de juegos en el carrito
   ngOnInit(): void {
     this.listaService.cantidadCarrito$
       .subscribe(cantidad => {
