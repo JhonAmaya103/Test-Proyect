@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { DetalleRoutingModule } from './detalle-routing.module';
 import { ListaCategoriasComponent } from './lista-categorias/lista-categorias.component';
 
+
+
 @NgModule({
   declarations: [
     ListaCategoriasComponent

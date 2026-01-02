@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ListasService } from '../Servicios/listas.service';
 
 @Component({
   selector: 'app-navbar',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AppNavbarComponent implements OnInit {
 
-  constructor() { }
+  cantidadCarrito = 0;
 
+  constructor(private listaService: ListasService) { }
+
+  //
   ngOnInit(): void {
+    this.listaService.cantidadCarrito$
+      .subscribe(cantidad => {
+        this.cantidadCarrito = cantidad;
+      });
   }
-
 }

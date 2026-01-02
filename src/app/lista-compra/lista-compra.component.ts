@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Juegos } from '../Servicios/categoria.model';
+import { ListasService } from '../Servicios/listas.service';
 
 @Component({
   selector: 'app-lista-compra',
@@ -7,9 +9,33 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ListaCompraComponent implements OnInit {
 
-  constructor() { }
+  @Input() idCategoria = 0;
+  juegosCarrito: Juegos[] = [];
+  total = 0;
 
+  constructor(private listaService: ListasService) { }
+  // Suscribirse al carrito de compras en el servicio
   ngOnInit(): void {
+    this.listaService.carrito$.subscribe(carrito => {
+
+      // filtrar por categoría si aplica
+      if (this.idCategoria > 0) {
+        this.juegosCarrito = carrito.filter(
+          juego => juego.categoriaId === this.idCategoria
+        );
+      } else {
+        this.juegosCarrito = carrito;
+      }
+
+      this.calcularTotal();
+    });
   }
 
+  // Método para calcular el total del carrito
+  calcularTotal(): void {
+    this.total = this.juegosCarrito.reduce(
+      (suma, juego) => suma + juego.precio,
+      0
+    );
+  }
 }

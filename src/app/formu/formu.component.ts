@@ -39,7 +39,7 @@ export class FormuComponent implements OnInit {
       /* MOSTRAR TODOS LOS JUEGOS*/
 
       if (!categoria_juego) {
-        this.idCategoria = 0; 
+        this.idCategoria = 0;
         this.sugerencias = [];
         return;
       }

@@ -1,1 +1,45 @@
-<p>lista-compra works!</p>
+<h1 class="text-xl font-bold mb-6">
+    Lista de la compra
+</h1>
+
+<div *ngIf="juegosCarrito.length === 0" class="text-gray-500">
+    No hay juegos en el carrito
+</div>
+
+<!-- Lista -->
+<div *ngIf="juegosCarrito.length > 0" class="flex flex-col divide-y">
+
+    <div *ngFor="let juego of juegosCarrito"
+        class="flex items-center gap-6 p-4  border-l-zinc-950 border rounded-lg shadow-md">
+
+        <!-- id -->
+        <div class="w-8 text-center font-semibold text-gray-700">
+            <p>ID {{ juego.id }}</p>
+        </div>
+
+        <!-- imagen -->
+        <div class="w-10 h-13 flex-shrink-0">
+            <img [src]="juego.imagen" alt="{{ juego.nombre }}" class="w-full h-full object-cover rounded border">
+        </div>
+
+        <!-- nombre -->
+        <div class="flex-1 font-semibold text-gray-800">
+            {{ juego.nombre }}
+        </div>
+
+        <!-- precio -->
+        <div class="text-green-600 font-medium">
+            <p>Precio: {{ juego.precio | currency:'COP':'symbol':'1.0-0' }}</p>
+        </div>
+
+    </div>
+</div>
+
+<!-- total -->
+<div *ngIf="juegosCarrito.length > 0" class="flex justify-end mt-6 p-6 text-lg font-bold border-t">
+
+    <span class="mr-4">Suma:</span>
+    <span class="text-green-700">
+        {{ total | currency:'COP':'symbol':'1.0-0' }}
+    </span>
+</div>

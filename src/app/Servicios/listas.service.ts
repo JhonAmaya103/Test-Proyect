@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Categoria, Juegos } from './categoria.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ListasService {
+
+  private carrito: Juegos[] = [];
 
   private categorias: Categoria[] = [
     { id: 1, nombre: 'Terror' },
@@ -27,16 +30,25 @@ export class ListasService {
     { id: 9, nombre: 'Clair Obscur:Expedition 33', categoriaId: 3, imagen: 'assets/imagenes/Exp33.jpg', precio: 190000, descripcion: 'es un videojuego de rol (RPG) de fantasía oscura desarrollado por la francesa Sandfall Interactive y publicado por Kepler Interactive en 2025. El título combina combate por turnos con elementos en tiempo real y está ambientado en un mundo inspirado en la Belle Époque, donde un grupo de voluntarios llamado Expedición 33 se aventura fuera de la aislada isla de Lumière para enfrentar a La Pintora, una entidad que cada año provoca un fenómeno que borra de la realidad a las personas mayores de cierta edad.' },
   ];
 
-  constructor() { }
+  //observable para la cantidad de juegos en el carrito
+  private cantidadCarritoSubject = new BehaviorSubject<number>(0);
+  cantidadCarrito$ = this.cantidadCarritoSubject.asObservable();
 
+  //observable para el carrito de compras
+  private carritoSubject = new BehaviorSubject<Juegos[]>([]);
+  carrito$ = this.carritoSubject.asObservable();
+
+
+  constructor() { }
+  // Métodos para obtener categorías y juegos
   getCategorias(): Categoria[] {
     return this.categorias;
   }
-
+  // Método para obtener todos los juegos
   getJuegos(): Juegos[] {
     return this.juegos;
   }
-
+  // Método para obtener un juego por nombre y categoría
   getJuego(nombre: string, categoriaId: number): Juegos | undefined {
     return this.juegos.find(j =>
       j.nombre.toLowerCase() === nombre.toLowerCase() &&
@@ -45,7 +57,16 @@ export class ListasService {
   }
 
   agregarAlCarrito(juego: Juegos): void {
-    console.log(`Juego agregado al carrito : ${juego.nombre}`);
-  } 
+    this.carrito.push(juego);
 
+    // actualizar observable del carrito
+    this.carritoSubject.next([...this.carrito]);
+
+    // actualizar cantidad de juegos en el carrito
+    this.cantidadCarritoSubject.next(this.carrito.length);
+  }
+
+  obtenerCarrito(): Juegos[] {
+    return this.carrito;
+  }
 }
