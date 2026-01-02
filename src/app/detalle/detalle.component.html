@@ -13,6 +13,12 @@
         <p>{{ juego.precio | currency: 'COP' : 'symbol':'1.0-0' }}</p>
         <p>{{ juego.descripcion }}</p>
       </div>
+      <div>
+        <button (click)="agregarAlCarrito(juego)"
+                class="bg-green-500 text-white px-4 py-2 m-4 rounded hover:bg-blue-600 align-top " >
+          Agregar al Carrito
+        </button>
+      </div>
     </div>
   </div>
 </div>

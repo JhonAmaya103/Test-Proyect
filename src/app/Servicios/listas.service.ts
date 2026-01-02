@@ -44,6 +44,8 @@ export class ListasService {
     );
   }
 
-
+  agregarAlCarrito(juego: Juegos): void {
+    console.log(`Juego agregado al carrito : ${juego.nombre}`);
+  } 
 
 }

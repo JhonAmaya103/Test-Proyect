@@ -42,4 +42,8 @@ export class DetalleComponent implements OnChanges {
 
     this.juegosCategoria = juegos;
   }
+  
+  agregarAlCarrito(juego: Juegos): void {
+    this.listaService.agregarAlCarrito(juego);
+  }
 }
