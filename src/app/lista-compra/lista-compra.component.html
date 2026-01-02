@@ -1,8 +1,8 @@
-<h1 class="text-xl font-bold mb-6">
+<h1 class="text-xl font-bold mb-6 text-white" >
     Lista de la compra
 </h1>
 
-<div *ngIf="juegosCarrito.length === 0" class="text-gray-500">
+<div *ngIf="juegosCarrito.length === 0" class="text-white">
     No hay juegos en el carrito
 </div>
 
@@ -13,7 +13,7 @@
         class="flex items-center gap-6 p-4  border-l-zinc-950 border rounded-lg shadow-md">
 
         <!-- id -->
-        <div class="w-8 text-center font-semibold text-gray-700">
+        <div class="w-8 text-center font-semibold text-white">
             <p>ID {{ juego.id }}</p>
         </div>
 
@@ -23,7 +23,7 @@
         </div>
 
         <!-- nombre -->
-        <div class="flex-1 font-semibold text-gray-800">
+        <div class="flex-1 font-semibold text-white">
             {{ juego.nombre }}
         </div>
 
@@ -38,7 +38,7 @@
 <!-- total -->
 <div *ngIf="juegosCarrito.length > 0" class="flex justify-end mt-6 p-6 text-lg font-bold border-t">
 
-    <span class="mr-4">Suma:</span>
+    <span class="mr-4 text-white">Suma:</span>
     <span class="text-green-700">
         {{ total | currency:'COP':'symbol':'1.0-0' }}
     </span>

@@ -3,7 +3,11 @@ module.exports = {
     "./src/**/*.{html,ts}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      backgroundImage: {
+        'fondo-app': "url('/assets/imagenes/fondo.jpg')",
+      }
+    },
   },
   plugins: [],
 }

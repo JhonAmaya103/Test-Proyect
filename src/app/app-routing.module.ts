@@ -1,9 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ListaCompraComponent } from './lista-compra/lista-compra.component';
+import { FormuComponent } from './formu/formu.component';
 
 
 const routes: Routes = [
+  {
+    path: '',
+    component:FormuComponent
+  },
   // Ruta para el componente ListaCompra
   {
     path: 'lista-compra',
