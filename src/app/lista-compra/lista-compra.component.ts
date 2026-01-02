@@ -38,4 +38,10 @@ export class ListaCompraComponent implements OnInit {
       0
     );
   }
+  agregar(juego: Juegos) {
+  const agregado = this.listaService.agregarAlCarrito(juego);
+
+  console.log(agregado ? 'Juego agregado al carrito.' : 'El juego ya está en el carrito.');
+ }
+
 }
