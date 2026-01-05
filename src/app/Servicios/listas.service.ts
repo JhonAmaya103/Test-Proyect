@@ -55,27 +55,27 @@ export class ListasService {
       j.categoriaId === categoriaId
     );
   }
-// Método para agregar un juego al carrito de compras
+  // Método para agregar un juego al carrito de compras
   agregarAlCarrito(juego: Juegos): boolean {
 
-  //  Validar si el juego ya esta agregado en el carrito
-  const existe = this.carrito.some(j => j.id === juego.id);
+    //  Validar si el juego ya esta agregado en el carrito
+    const existe = this.carrito.some(j => j.id === juego.id);
 
-  if (existe) {
-    return false; 
+    if (existe) {
+      return false;
+    }
+
+    //  Agregar si no existe
+    this.carrito.push(juego);
+
+    // Actualizar observable del carrito
+    this.carritoSubject.next([...this.carrito]);
+
+    // Actualizar cantidad de juegos
+    this.cantidadCarritoSubject.next(this.carrito.length);
+
+    return true;
   }
-
-  //  Agregar si no existe
-  this.carrito.push(juego);
-
-  // Actualizar observable del carrito
-  this.carritoSubject.next([...this.carrito]);
-
-  // Actualizar cantidad de juegos
-  this.cantidadCarritoSubject.next(this.carrito.length);
-
-  return true; // ✅ Agregado correctamente
-}
 
 
 }
