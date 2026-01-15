@@ -1,45 +1,53 @@
-<h1 class="text-xl font-bold mb-6 text-white" >
-    Lista de la compra
-</h1>
+<div *ngFor="let juego of juegosCarrito; let i = index"
+    class="flex items-center px-6 py-4 border-b border-white/30 text-white">
 
-<div *ngIf="juegosCarrito.length === 0" class="text-white">
-    No hay juegos en el carrito
-</div>
+    <!-- Enumeracion -->
+    <div class="w-14 text-sm font-semibold">
+        {{ i + 1 }}
+    </div>
 
-<!-- Lista -->
-<div *ngIf="juegosCarrito.length > 0" class="flex flex-col divide-y">
+    <!-- Imagen -->
+    <div class="w-10 h-12 mr-4 flex-shrink-0">
+        <img
+            [src]="juego.imagen"
+            alt="{{ juego.nombre }}"
+            class="w-full h-full object-cover rounded border border-white/30">
+    </div>
 
-    <div *ngFor="let juego of juegosCarrito"
-        class="flex items-center gap-6 p-4  border-l-zinc-950 border rounded-lg shadow-md">
+    <!-- Nombre -->
+    <div class="flex-1 font-semibold">
+        {{ juego.nombre }}
+    </div>
 
-        <!-- id -->
-        <div class="w-8 text-center font-semibold text-white">
-            <p>ID {{ juego.id }}</p>
-        </div>
+    <!-- Botón eliminar (hexágono) -->
+    <button
+        (click)="eliminarDelCarrito(juego.id)"
+        class="mr-6 w-10 h-10 flex items-center justify-center
+               bg-transparent border-2 border-white
+               clip-hexagon hover:border-red-500 hover:text-red-500
+               transition invert"
+        title="Eliminar">
+        <img
+            src="/assets/iconos/bote-compra.svg"
+            alt="Eliminar"
+            class="w-5 h-5 invert">
+    </button>
 
-        <!-- imagen -->
-        <div class="w-10 h-13 flex-shrink-0">
-            <img [src]="juego.imagen" alt="{{ juego.nombre }}" class="w-full h-full object-cover rounded border">
-        </div>
-
-        <!-- nombre -->
-        <div class="flex-1 font-semibold text-white">
-            {{ juego.nombre }}
-        </div>
-
-        <!-- precio -->
-        <div class="text-green-600 font-medium">
-            <p>Precio: {{ juego.precio | currency:'COP':'symbol':'1.0-0' }}</p>
-        </div>
-
+    <!-- Precio -->
+    <div class="text-green-500 font-semibold text-sm whitespace-nowrap">
+        Precio: {{ juego.precio | currency:'COP':'symbol':'1.0-0' }}
     </div>
 </div>
 
-<!-- total -->
-<div *ngIf="juegosCarrito.length > 0" class="flex justify-end mt-6 p-6 text-lg font-bold border-t">
+<!-- Suma total -->
+<div *ngIf="juegosCarrito.length > 0"
+    class="flex justify-end items-center px-6 py-4 text-lg font-bold border-t border-white/40">
 
-    <span class="mr-4 text-white">Suma:</span>
-    <span class="text-green-700">
+    <span class="mr-4 text-white">
+        Suma:
+    </span>
+
+    <span class="text-green-500">
         {{ total | currency:'COP':'symbol':'1.0-0' }}
     </span>
 </div>

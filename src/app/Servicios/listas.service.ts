@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Categoria, Juegos } from './categoria.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject} from 'rxjs';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -37,7 +38,6 @@ export class ListasService {
   //observable para el carrito de compras
   private carritoSubject = new BehaviorSubject<Juegos[]>([]);
   carrito$ = this.carritoSubject.asObservable();
-
 
   constructor() { }
   // Métodos para obtener categorías y juegos

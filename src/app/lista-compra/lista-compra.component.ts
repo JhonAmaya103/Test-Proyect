@@ -14,7 +14,7 @@ export class ListaCompraComponent implements OnInit {
   total = 0;
 
   constructor(private listaService: ListasService) { }
-  // Suscripción al observable del carrito de compras
+  // Suscripción al observable del carrito de compras // 
   ngOnInit(): void {
     this.listaService.carrito$.subscribe(carrito => {
 
@@ -38,5 +38,12 @@ export class ListaCompraComponent implements OnInit {
       0
     );
   }
-
+  //metodo para eliminar del carrito
+  eliminarDelCarrito(juegoId: number): void {
+    const index = this.juegosCarrito.findIndex(juego => juego.id === juegoId);
+    if (index !== -1) {
+      this.juegosCarrito.splice(index, 1);
+      this.calcularTotal();
+    }
+  }
 }
